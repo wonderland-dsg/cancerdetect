@@ -10,10 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     sourceButton = new QToolButton;
     sourceButton->setIconSize(resultSize);
-    calculateButton = new QPushButton(tr("&Calculate"));
+    calculateButton = new QPushButton(tr("&Recgnize"));
     calculateButton->setEnabled(false);
     showResult = new QTextEdit;
     showResult->setReadOnly(true);
+
     connect(sourceButton, SIGNAL(clicked()), this, SLOT(chooseSource()));
     connect(calculateButton, SIGNAL(clicked()), this, SLOT(recalculateResult()));
     QGridLayout *mainLayout = new QGridLayout;
@@ -94,19 +95,22 @@ cv::Mat QImage2cvMat(QImage image)
 }
 
 //#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_glcm_all_1.model" //svm_for_glcm_1.model"
-#define mp "../resource/svm_for_glcm_all_1.model"
+#define mp "../resource/svm_for_glcm_all_2_linear.model"
 #define store_param "../resource/samples_all_pos_neg.param"
 //#define store_param "/home/dang/ClionProjects/breast_concer_detection/resource/samples_all_pos_neg.param"
 
 void MainWindow::recalculateResult()
 {
-    showResult->setText(tr("doing...\n"));
+    showResult->clear();
 
+    showResult->setText(tr("doing...\n"));
+    cv::waitKey(100);
+    showResult->setFont(QFont( "Timers" , 18 ,  QFont::Bold));
     CancerPredictGlcm* mcp;
     mcp=new CancerPredictGlcm(store_param);
      cv::Mat img=QImage2cvMat(sourceImage);
-     cv::imshow("fdfdfd",img);
-     cv::waitKey(10);
+     //cv::imshow("fdfdfd",img);
+     //cv::waitKey(10);
      double result=mcp->predictSample(img,mp);
      std::cout<<"The result is:"<<result;
 
@@ -114,7 +118,12 @@ void MainWindow::recalculateResult()
     sprintf(str,"%lf",result);
     printf("%s\n",str);
     QString res;
-    res=QString("result:")+QString(str)+"\n";
+    if(result<0){
+        res=QString("result:")+"恶性"+"\n";
+    }else{
+        res=QString("result:")+"良性"+"\n";
+    }
+
     res+="model info:\n";
     svm_model* model=svm_load_model(mp);
     svm_parameter param=model->param;
@@ -139,6 +148,7 @@ void MainWindow::recalculateResult()
     res+="nr_weight = 0\n";
 
     showResult->setText(res);
+    //showResult->setFont(QFont( "Timers" , 18 ,  QFont::Bold));
 }
 
 

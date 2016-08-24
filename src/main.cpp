@@ -1,6 +1,6 @@
 #define tpl "/home/dang/ClionProjects/breast_concer_detection/resource/train_norm_pos.lst"  //pos_all_train.lst" //
 #define tnl "/home/dang/ClionProjects/breast_concer_detection/resource/train_norm_neg.lst"   //neg_all_train.lst" //
-#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_glcm_all_1.model" //svm_for_glcm_1.model"
+#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_glcm_all_2_linear.model" //svm_for_glcm_1.model"
 //#define vpl "/home/dang/ClionProjects/breast_concer_detection/resource/validation_norm_pos.lst" //pos_all_test.lst" //
 //#define vnl "/home/dang/ClionProjects/breast_concer_detection/resource/validation_norm_neg.lst"  //neg_all_test.lst" //
 #define vpl "/home/dang/ClionProjects/breast_concer_detection/resource/samples/pos_all.lst"
@@ -18,6 +18,7 @@
 //#define myLBP
 //#define myTEST
 //#define QTdialog
+#define myGUI
 
 #ifdef myLBP
 #include <iostream>
@@ -78,7 +79,7 @@ int main(){
     nd::normData* mynorm;
     mynorm=new nd::normData();
     //mynorm->start(vpl,vnl,norm_file);
-/*
+
     std::ifstream fp("/home/dang/ClionProjects/breast_concer_detection/resource/scale_samples_all_pos_neg.dat");
     std::ofstream fp_t(scale_train_file);
     std::ofstream fp_v(scale_test_file);
@@ -88,24 +89,24 @@ int main(){
     }
     cv::string temp;
     int i=0;
-    for(;i<600;i++){
+    for(;i<0;i++){
 
         getline(fp,temp);
         fp_v<<temp<<std::endl;
     }
-    for(;i<2450;i++){
+    for(;i<2700;i++){ //2450
         getline(fp,temp);
         fp_t<<temp<<std::endl;
     }
-    for(;i<2753;i++){
+    for(;i<0;i++){//2753
 
         getline(fp,temp);
         fp_v<<temp<<std::endl;
     }
     fp.close();
     fp_t.close();
-    fp_v.close();*/
-    mytrain::mytrain(scale_train_file,mp,scale_test_file);
+    fp_v.close();
+    mytrain::mytrain(scale_train_file,mp,scale_train_file);//scale_test_file
     return 0;
 }
 #endif
@@ -163,6 +164,7 @@ int main(int argc,char** argv){
 
 #endif
 
+#ifdef myGUI
 #include "mainwindow.h"
 #include <QApplication>
 
@@ -175,7 +177,7 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-
+#endif
 
 
 

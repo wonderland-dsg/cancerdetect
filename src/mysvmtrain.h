@@ -242,6 +242,5 @@ namespace mytrain{
 
     };
 
-}
 
 #endif //BREAST_CONCER_DETECTION_MYSVMTRAIN_H
