@@ -4,7 +4,7 @@
 #include <cstdio>
 
 
-static const QSize resultSize(240, 180);
+static const QSize resultSize(480, 360);
 
 MainWindow::MainWindow(QWidget *parent)
 {
