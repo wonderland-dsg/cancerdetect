@@ -3,6 +3,7 @@
 
 #include <QPainter>
 #include <QWidget>
+#include <opencv2/opencv.hpp>
 
 QT_BEGIN_NAMESPACE
 class QComboBox;
@@ -33,6 +34,8 @@ private:
 
     QImage sourceImage;
     QTextEdit *showResult;
+
+    cv::Mat sourceImg;
 };
 
 #endif // MAINWINDOW_H

@@ -12,7 +12,7 @@ void LBP::getLBPImage(cv::Mat &src, cv::Mat &lbp) {
     else {
         src.copyTo(grayImg);
     }
-    cv::equalizeHist(grayImg,grayImg);
+    //cv::equalizeHist(grayImg,grayImg);
     lbp.create(src.size(), src.depth());
     lbp.setTo(0);
     for (int r = 1; r < grayImg.rows - 1; ++r) {

@@ -52,6 +52,7 @@ void CancerPredictGlcm::getFeatureVector(cv::Mat source_imgage, std::vector<doub
                             (value-feature_min[i])/
                             (feature_max[i]-feature_min[i]);
             feature[i]=value;
+            std::cout<<value<<std::endl;
         }
     }
 }
@@ -114,13 +115,13 @@ void CancerPredictGlcm::trainModel(const char *pos_txt_file, const char *neg_txt
     svm_parameter param;
     // default values
     param.svm_type =C_SVC ;//;ONE_CLASS(so bad)  NU_SVC(maybe)C_SVC  NU_SVC
-    param.kernel_type = RBF; //RBF(validation accuracy<0.7 )  LINEAR(<0.65) SIGMOID(<0.7) //SIGMOID(2016-8-10 first run) (second is RBF) third is LINEAR
+    param.kernel_type = LINEAR; //RBF(validation accuracy<0.7 )  LINEAR(<0.65) SIGMOID(<0.7) //SIGMOID(2016-8-10 first run) (second is RBF) third is LINEAR
     param.degree = 3;
     param.gamma = 1.0/1188;	// 1/num_features
     param.coef0 = 0;
     param.nu = 0.5;
     param.cache_size = 100;
-    param.C = 20000; //this parameter always need change,
+    param.C = 0.53; //this parameter always need change,
     param.eps = 1e-3;
     param.p = 0.1;
     param.shrinking = 1;

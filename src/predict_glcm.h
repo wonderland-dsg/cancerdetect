@@ -110,15 +110,15 @@ public:
         std::cout<<"open param file success!"<<std::endl;
         if (fgetc(fp_restore) == 'x')
         {
-            std::cout<<"begin ....!"<<std::endl;
+            //std::cout<<"begin ....!"<<std::endl;
             if(fscanf(fp_restore, "%lf %lf\n", &lower, &upper) != 2)
                 clean_up(fp_restore,"ERROR: failed to read scaling parameters\n");
             while(fscanf(fp_restore,"%d %lf %lf\n",&idx,&fmin,&fmax)==3)
             {
-                std::cout<<idx<<":"<<fmin<<":"<<fmax<<std::endl;
+                //std::cout<<idx<<":"<<fmin<<":"<<fmax<<std::endl;
                 for(i = next_index;i<idx;i++)
                     if(feature_min[i] != feature_max[i]){
-                        printf("WARNING: feature index %d appeared in file -- was not seen in the scaling factor file %s.\n", i,  param_file);
+                        fprintf(stderr,"WARNING: feature index %d appeared in file -- was not seen in the scaling factor file %s.\n", i,  param_file);
                     }
 
 
@@ -127,7 +127,7 @@ public:
 
                 next_index = idx + 1;
             }
-            std::cout<<"out loop"<<std::endl;
+            //std::cout<<"out loop"<<std::endl;
             for(i=next_index;i<=max_index;i++)
                 if(feature_min[i] != feature_max[i])
                     fprintf(stderr,
@@ -139,7 +139,7 @@ public:
             Range[i][0]=feature_min[i];
             Range[i][1]=feature_max[i];
         }
-        std::cout<<"dsfsdfds"<<std::endl;
+        //std::cout<<"dsfsdfds"<<std::endl;
 
     };
     ~CancerPredictGlcm(){

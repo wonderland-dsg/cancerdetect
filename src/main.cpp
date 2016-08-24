@@ -1,6 +1,6 @@
 #define tpl "/home/dang/ClionProjects/breast_concer_detection/resource/train_norm_pos.lst"  //pos_all_train.lst" //
 #define tnl "/home/dang/ClionProjects/breast_concer_detection/resource/train_norm_neg.lst"   //neg_all_train.lst" //
-#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_glcm_all_2_linear.model" //svm_for_glcm_1.model"
+#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_glcm_all_3_linear.model" //svm_for_glcm_1.model"
 //#define vpl "/home/dang/ClionProjects/breast_concer_detection/resource/validation_norm_pos.lst" //pos_all_test.lst" //
 //#define vnl "/home/dang/ClionProjects/breast_concer_detection/resource/validation_norm_neg.lst"  //neg_all_test.lst" //
 #define vpl "/home/dang/ClionProjects/breast_concer_detection/resource/samples/pos_all.lst"
@@ -27,19 +27,19 @@
 using namespace std;
 //#define test_pos
 #define test_neg
-#define train
+//#define train
 int main() {
     CancerPredict mcp;
     #ifdef train
-    mcp.trainModel("/home/dang/ClionProjects/breast_concer_detection/resource/pos_all_train.lst",
-                   "/home/dang/ClionProjects/breast_concer_detection/resource/neg_all_train.lst",
-                   "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_2.model");
+    mcp.trainModel("/home/dang/ClionProjects/breast_concer_detection/resource/samples/pos_all.lst",
+                   "/home/dang/ClionProjects/breast_concer_detection/resource/samples/neg_all.lst",
+                   "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model");
     #endif
     #ifdef test_pos
-    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/pos_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/svm_for_all_2.model",1.0);
+    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/pos_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model",1.0);
     #endif
     #ifdef test_neg
-    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/neg_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/respurce/svm_for_all_2.model",-1.0);
+    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/neg_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model",-1.0);
     #endif
 
     return 0;
@@ -48,15 +48,15 @@ int main() {
 
 #ifdef myGLCM
 #include "predict_glcm.h"
-//#define test_pos
+#define test_pos
 #define test_neg
-//#define train
+#define train
 int main(){
     CancerPredictGlcm* mcp;
     mcp=new CancerPredictGlcm(store_param);
 #ifdef train
-    mcp->trainModel(tpl,
-                   tnl,
+    mcp->trainModel(vpl,
+                   vnl,
                    mp);
 #endif
 #ifdef test_pos
@@ -139,7 +139,7 @@ int main(int argc,char** argv){
     QApplication a(argc,argv);
     QString file_name = QFileDialog::getOpenFileName(NULL, //parent moudle
                                                      QObject::tr("Open File"), //dialog title
-                                                     ".", //the init directory
+                                                     "/home/dang/ClionProjects/breast_concer_detection/resource", //the init directory
                                                      "JPEG Files(*.jpg);;PNG Files(*.png)",
                                                      0);
 
@@ -150,7 +150,7 @@ int main(int argc,char** argv){
         mcp=new CancerPredictGlcm(store_param);
         cv::Mat img=cv::imread(file_name.toStdString());
         cv::imshow("fdfdfd",img);
-        cv::waitKey(0);
+        cv::waitKey(10);
         std::cout<<"The result is:"<<mcp->predictSample(img,mp);
 
     }

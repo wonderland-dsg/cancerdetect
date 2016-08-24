@@ -102,13 +102,13 @@ void CancerPredict::trainModel(const char *pos_txt_file, const char *neg_txt_fil
     svm_parameter param;
     // default values
     param.svm_type =C_SVC ;//;ONE_CLASS(so bad)  NU_SVC(maybe)C_SVC  NU_SVC
-    param.kernel_type = RBF; //RBF(validation accuracy<0.7 )  LINEAR(<0.65) SIGMOID(<0.7) //SIGMOID(2016-8-10 first run) (second is RBF) third is LINEAR
+    param.kernel_type = LINEAR; //RBF(validation accuracy<0.7 )  LINEAR(<0.65) SIGMOID(<0.7) //SIGMOID(2016-8-10 first run) (second is RBF) third is LINEAR
     param.degree = 3;
     param.gamma = 2.0/nsamples;	// 1/num_features
     param.coef0 = 0;
     param.nu = 0.5;
     param.cache_size = 100;
-    param.C = 800; //this parameter always need change,
+    param.C = 5; //this parameter always need change,
     param.eps = 1e-3;
     param.p = 0.1;
     param.shrinking = 1;
@@ -152,13 +152,8 @@ void CancerPredict::trainModel(const char *pos_txt_file, const char *neg_txt_fil
 }
 
 double CancerPredict::predictSample(cv::Mat img, const char *model_file) {
-    std::vector<float> feature;
-    mLBP.getLBPVector(img, feature);
-    svm_node *x;
-    x=new svm_node[feature.size()];
-    copyFeatureToNode(feature,x);
     svm_model* model=svm_load_model(model_file);
-    double predict_label=svm_predict(model,x);
+    double predict_label=predictSample(img,model);
     return predict_label;
 }
 
@@ -170,6 +165,9 @@ double CancerPredict::predictSample(cv::Mat img, svm_model* model) {
     x[feature.size()].index=-1;
     copyFeatureToNode(feature,x);
     double predict_label=svm_predict(model,x);
+    //svm_free_and_destroy_model(&model);
+    delete[] x;
+    feature.clear();
     return predict_label;
 }
 void CancerPredict::testModel(const char *txt_file, const char *model_file,double target) {
@@ -178,6 +176,7 @@ void CancerPredict::testModel(const char *txt_file, const char *model_file,doubl
     int success_count=0;
     std::vector<std::string> img_path;
     readImagePaths(txt_file, img_path);
+    std::cout<<img_path.size()<<std::endl;
     for(int i=0;i<img_path.size();i++){
         cv::Mat img=cv::imread(img_path[i]);
         double predict_label=predictSample(img,model);

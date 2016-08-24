@@ -1,6 +1,6 @@
 #include <QtWidgets>
 #include "mainwindow.h"
-#include "predict_glcm.h"
+#include "breastcancer_predict.h"
 #include <cstdio>
 
 
@@ -63,6 +63,7 @@ void MainWindow::loadImage(const QString &fileName, QImage *image,
 
     *image = fixedImage;
     calculateButton->setEnabled(true);
+    sourceImg=cv::imread(fileName.toStdString());
     recalculateResult();
 }
 
@@ -94,29 +95,33 @@ cv::Mat QImage2cvMat(QImage image)
     return mat;
 }
 
-//#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_glcm_all_1.model" //svm_for_glcm_1.model"
-#define mp "../resource/svm_for_glcm_all_2_linear.model"
-#define store_param "../resource/samples_all_pos_neg.param"
-//#define store_param "/home/dang/ClionProjects/breast_concer_detection/resource/samples_all_pos_neg.param"
+#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model" //svm_for_glcm_1.model"
+//#define mp "../resource/svm_for_glcm_all_2_linear.model"
+//#define store_param "../resource/samples_all_pos_neg.param"
+#define store_param "/home/dang/ClionProjects/breast_concer_detection/resource/samples_all_pos_neg.param"
 
 void MainWindow::recalculateResult()
 {
     showResult->clear();
 
     showResult->setText(tr("doing...\n"));
-    cv::waitKey(100);
+    //cv::waitKey(100);
     showResult->setFont(QFont( "Timers" , 18 ,  QFont::Bold));
-    CancerPredictGlcm* mcp;
-    mcp=new CancerPredictGlcm(store_param);
-     cv::Mat img=QImage2cvMat(sourceImage);
-     //cv::imshow("fdfdfd",img);
-     //cv::waitKey(10);
-     double result=mcp->predictSample(img,mp);
-     std::cout<<"The result is:"<<result;
+    //CancerPredictGlcm* mcp;
+    //mcp=new CancerPredictGlcm(store_param);
+    CancerPredict mcp;
+    //cv::Mat img=QImage2cvMat(sourceImage);
+    cv::Mat img=sourceImg;
+    //cv::imshow("fdfdfd",img);
+    //cv::waitKey(10);
+    svm_model* model=svm_load_model(mp);
+    showResult->setText(tr("load model success!\n"));
+    double result=mcp.predictSample(img,model);
+    std::cout<<"The result is:"<<result;
 
     char str[10]={0};
     sprintf(str,"%lf",result);
-    printf("%s\n",str);
+    printf("\n%s\n",str);
     QString res;
     if(result<0){
         res=QString("result:")+"恶性"+"\n";
@@ -125,12 +130,12 @@ void MainWindow::recalculateResult()
     }
 
     res+="model info:\n";
-    svm_model* model=svm_load_model(mp);
-    svm_parameter param=model->param;
+    //svm_model* model=svm_load_model(mp);
+    //svm_parameter param=model->param;
     // default values
     res+="svm_type:C_SVC\n";
 
-    res+="kernel_type = RBF\n";
+    res+="kernel_type = LINEAR\n";
 
     res+="degree = 3\n";
 
@@ -140,7 +145,7 @@ void MainWindow::recalculateResult()
 
     res+="nu = 0.5\n";
     res+="cache_size = 100\n";
-    res+="C = 20000\n";
+    res+="C = 5\n";
     res+="eps = 1e-3\n";
     res+="p = 0.1\n";
     res+="probability = 0\n";
