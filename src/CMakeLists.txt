@@ -27,7 +27,8 @@ set(SOURCE_FILES
         GLCM.h
         GLCM.cpp
         predict_glcm.h predict_glcm.cpp normData.h normData.cpp my_scale.h mysvmtrain.h mysvmtrain.cpp
-        mainwindow.h mainwindow.cpp)
+        mainwindow.h mainwindow.cpp
+        cvmatandqimage.h cvmatandqimage.cpp)
 
 add_executable(breast_concer_detection ${SOURCE_FILES})
 

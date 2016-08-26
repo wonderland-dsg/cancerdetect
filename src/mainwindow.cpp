@@ -1,6 +1,7 @@
 #include <QtWidgets>
 #include "mainwindow.h"
 #include "breastcancer_predict.h"
+#include "cvmatandqimage.h"
 #include <cstdio>
 
 
@@ -47,7 +48,10 @@ void MainWindow::chooseImage(const QString &title, QImage *image,
 void MainWindow::loadImage(const QString &fileName, QImage *image,
                               QToolButton *button)
 {
-    image->load(fileName);
+    sourceImg=cv::imread(fileName.toStdString());
+    //image->load(fileName);
+    QImage temp=QtOcv::mat2Image_shared(sourceImg);
+    image=&temp;
 
     // Scale the image to given size
     *image = image->scaled(resultSize, Qt::KeepAspectRatio);
@@ -63,7 +67,7 @@ void MainWindow::loadImage(const QString &fileName, QImage *image,
 
     *image = fixedImage;
     calculateButton->setEnabled(true);
-    sourceImg=cv::imread(fileName.toStdString());
+
     recalculateResult();
 }
 
@@ -94,6 +98,7 @@ cv::Mat QImage2cvMat(QImage image)
     }
     return mat;
 }
+
 
 #define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model" //svm_for_glcm_1.model"
 //#define mp "../resource/svm_for_glcm_all_2_linear.model"

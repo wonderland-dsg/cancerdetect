@@ -18,19 +18,21 @@
       <sourceFolder url="file://$MODULE_DIR$/src/LBP.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/normData.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mysvmtrain.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/cvmatandqimage.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/GLCM.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/svm.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/svm.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/GLCM.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/predict_glcm.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/cvmatandqimage.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/breastcancer_predict.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/predict_glcm.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/my_scale.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mysvmtrain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/normData.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/LBP.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
