@@ -50,7 +50,9 @@ void MainWindow::loadImage(const QString &fileName, QImage *image,
 {
     sourceImg=cv::imread(fileName.toStdString());
     //image->load(fileName);
-    QImage temp=QtOcv::mat2Image_shared(sourceImg);
+    QImage temp=QtOcv::mat2Image(sourceImg);
+    cv::imshow("source img",sourceImg);
+    cv::waitKey(0);
     image=&temp;
 
     // Scale the image to given size
