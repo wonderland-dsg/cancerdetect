@@ -51,8 +51,8 @@ void MainWindow::loadImage(const QString &fileName, QImage *image,
     sourceImg=cv::imread(fileName.toStdString());
     //image->load(fileName);
     QImage temp=QtOcv::mat2Image(sourceImg);
-    cv::imshow("source img",sourceImg);
-    cv::waitKey(0);
+    //cv::imshow("source img",sourceImg);
+    //cv::waitKey(0);
     image=&temp;
 
     // Scale the image to given size
@@ -102,7 +102,7 @@ cv::Mat QImage2cvMat(QImage image)
 }
 
 
-#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model" //svm_for_glcm_1.model"
+#define mp "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP.model" //svm_for_glcm_1.model"
 //#define mp "../resource/svm_for_glcm_all_2_linear.model"
 //#define store_param "../resource/samples_all_pos_neg.param"
 #define store_param "/home/dang/ClionProjects/breast_concer_detection/resource/samples_all_pos_neg.param"

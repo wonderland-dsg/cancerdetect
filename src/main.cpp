@@ -15,10 +15,10 @@
 
 //#define myGLCM
 //#define myNORM
-//#define myLBP
+#define myLBP
 //#define myTEST
 //#define QTdialog
-#define myGUI
+//#define myGUI
 
 #ifdef myLBP
 #include <iostream>
@@ -33,13 +33,13 @@ int main() {
     #ifdef train
     mcp.trainModel("/home/dang/ClionProjects/breast_concer_detection/resource/samples/pos_all.lst",
                    "/home/dang/ClionProjects/breast_concer_detection/resource/samples/neg_all.lst",
-                   "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model");
+                   "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V3.model");
     #endif
     #ifdef test_pos
-    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/pos_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model",1.0);
+    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/pos_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V3.model",1.0);
     #endif
     #ifdef test_neg
-    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/neg_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V2.model",-1.0);
+    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/neg_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V3.model",-1.0);
     #endif
 
     return 0;

@@ -112,7 +112,7 @@ void CancerPredict::trainModel(const char *pos_txt_file, const char *neg_txt_fil
     param.eps = 1e-3;
     param.p = 0.1;
     param.shrinking = 1;
-    param.probability = 0;
+    param.probability = 1;
     param.nr_weight = 0;
     param.weight_label = NULL;
     param.weight = NULL;
@@ -135,7 +135,10 @@ void CancerPredict::trainModel(const char *pos_txt_file, const char *neg_txt_fil
     int success_count=0;
     for(int i=0;i<nsamples;i++){
         svm_node* x=pnodes[i];
-        double predict_label=svm_predict(model,x);
+        //double predict_label=svm_predict(model,x);
+        double prob_estimates[2];
+        double predict_label=svm_predict_probability(model,x,prob_estimates);
+        std::cout<<"probability is: "<<prob_estimates[0]<<"  "<<prob_estimates[1]<<std::endl;
         std::cout<<predict_label<<std::endl;
         if(predict_label==y[i]){
             success_count++;
@@ -165,6 +168,9 @@ double CancerPredict::predictSample(cv::Mat img, svm_model* model) {
     x[feature.size()].index=-1;
     copyFeatureToNode(feature,x);
     double predict_label=svm_predict(model,x);
+    //double prob_estimates[2];
+    //double predict_label=svm_predict_probability(model,x,prob_estimates);
+    //std::cout<<"probability is: "<<prob_estimates[0]<<"  "<<prob_estimates[1]<<" model(label<0,1>):"<<model->label[0]<<" "<<model->label[1]<<std::endl;
     //svm_free_and_destroy_model(&model);
     delete[] x;
     feature.clear();

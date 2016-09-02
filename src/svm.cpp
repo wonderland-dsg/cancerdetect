@@ -8,6 +8,9 @@
 #include <limits.h>
 #include <locale.h>
 #include "svm.h"
+
+#include <iostream>
+
 int libsvm_version = LIBSVM_VERSION;
 typedef float Qfloat;
 typedef signed char schar;
@@ -2585,6 +2588,7 @@ double svm_predict(const svm_model *model, const svm_node *x)
 	else 
 		dec_values = Malloc(double, nr_class*(nr_class-1)/2);
 	double pred_result = svm_predict_values(model, x, dec_values);
+	std::cout<<"dec_values:"<<dec_values[0]<<std::endl;
 	free(dec_values);
 	return pred_result;
 }
