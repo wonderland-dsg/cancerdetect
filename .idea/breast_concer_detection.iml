@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Debug/src/breast_concer_detection_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Debug/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Debug/src/breast_concer_detection_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Debug/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/MinSizeRel/src/breast_concer_detection_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/MinSizeRel/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/MinSizeRel/src/breast_concer_detection_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/MinSizeRel/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/RelWithDebInfo/src/breast_concer_detection_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/RelWithDebInfo/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/RelWithDebInfo/src/breast_concer_detection_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/RelWithDebInfo/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Release/src/breast_concer_detection_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Release/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Release/src/breast_concer_detection_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Release/src/breast_concer_detection_automoc.cpp" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/breastcancer_predict.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/LBP.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/normData.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mysvmtrain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/predict_glcm.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/cvmatandqimage.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mysvmtrain.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/cvmatandqimage.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/GLCM.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/predict_glcm.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/svm.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/svm.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/GLCM.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/predict_glcm.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/cvmatandqimage.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/breastcancer_predict.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/predict_glcm.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/normData.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/LBP.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/my_scale.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/GLCM.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/cvmatandqimage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mysvmtrain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mainwindow.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/breastcancer_predict.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Canny.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/normData.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/LBP.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
@@ -46,10 +47,10 @@
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
           <root url="file:///usr/local/include" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Release/src" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Debug/src" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/RelWithDebInfo/src" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/MinSizeRel/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Release/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Debug/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/RelWithDebInfo/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/MinSizeRel/src" />
         </CLASSES>
         <SOURCES>
           <root url="file:///usr/include" />
@@ -57,16 +58,16 @@
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
           <root url="file:///usr/local/include" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Release/src" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Debug/src" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/RelWithDebInfo/src" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/MinSizeRel/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Release/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Debug/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/RelWithDebInfo/src" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/MinSizeRel/src" />
         </SOURCES>
         <excluded>
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Release/src/breast_concer_detection_automoc.cpp" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/Debug/src/breast_concer_detection_automoc.cpp" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/RelWithDebInfo/src/breast_concer_detection_automoc.cpp" />
-          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/breast_concer_detection-48760ff8/48760ff8/MinSizeRel/src/breast_concer_detection_automoc.cpp" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Release/src/breast_concer_detection_automoc.cpp" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/Debug/src/breast_concer_detection_automoc.cpp" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/RelWithDebInfo/src/breast_concer_detection_automoc.cpp" />
+          <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/cancerdetect-c503f95b/c503f95b/MinSizeRel/src/breast_concer_detection_automoc.cpp" />
         </excluded>
       </library>
     </orderEntry>

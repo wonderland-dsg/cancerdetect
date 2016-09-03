@@ -15,7 +15,7 @@ void CancerPredict::readImagePaths(std::string txtPathFile, std::vector<std::str
         }
         std::string path;
         while (std::getline(textFile, path, '\n')) {
-            path="/home/dang/ClionProjects/breast_concer_detection/resource/samples/"+path;
+            path="../resource/"+path;
             imgPaths.push_back(path);
         }
 }
@@ -74,6 +74,7 @@ void CancerPredict::readTrainSample(const std::vector<std::string>& img_path,dou
         cv::Mat img = cv::imread(img_path[i]);
         std::vector<float> feature;
         mLBP.getLBPVector(img, feature);
+        //std::cout<<"mLBP.getLBPVector(img, feature) success!"<<std::endl;
         pnodes[cur+i] = new svm_node[(int)feature.size() + 1];
         copyFeatureToNode(feature, pnodes[cur+i]);
         y[i+cur] = flag;
@@ -104,7 +105,7 @@ void CancerPredict::trainModel(const char *pos_txt_file, const char *neg_txt_fil
     param.svm_type =C_SVC ;//;ONE_CLASS(so bad)  NU_SVC(maybe)C_SVC  NU_SVC
     param.kernel_type = LINEAR; //RBF(validation accuracy<0.7 )  LINEAR(<0.65) SIGMOID(<0.7) //SIGMOID(2016-8-10 first run) (second is RBF) third is LINEAR
     param.degree = 3;
-    param.gamma = 2.0/nsamples;	// 1/num_features
+    param.gamma = 0;	// 1/num_features
     param.coef0 = 0;
     param.nu = 0.5;
     param.cache_size = 100;
@@ -167,10 +168,14 @@ double CancerPredict::predictSample(cv::Mat img, svm_model* model) {
     x=new svm_node[feature.size()+1];
     x[feature.size()].index=-1;
     copyFeatureToNode(feature,x);
-    double predict_label=svm_predict(model,x);
-    //double prob_estimates[2];
-    //double predict_label=svm_predict_probability(model,x,prob_estimates);
+    //double predict_label=svm_predict(model,x);
+    double prob_estimates[2];
+    double predict_label=svm_predict_probability(model,x,prob_estimates);
+    if(fabs(prob_estimates[0]-prob_estimates[1])<0.15){
+        predict_label=0;
+    }
     //std::cout<<"probability is: "<<prob_estimates[0]<<"  "<<prob_estimates[1]<<" model(label<0,1>):"<<model->label[0]<<" "<<model->label[1]<<std::endl;
+
     //svm_free_and_destroy_model(&model);
     delete[] x;
     feature.clear();
@@ -179,7 +184,7 @@ double CancerPredict::predictSample(cv::Mat img, svm_model* model) {
 void CancerPredict::testModel(const char *txt_file, const char *model_file,double target) {
     std::cout<<"begin test..."<<std::endl;
     svm_model* model=svm_load_model(model_file);
-    int success_count=0;
+    int success_count=0,refuse=0;
     std::vector<std::string> img_path;
     readImagePaths(txt_file, img_path);
     std::cout<<img_path.size()<<std::endl;
@@ -187,8 +192,12 @@ void CancerPredict::testModel(const char *txt_file, const char *model_file,doubl
         cv::Mat img=cv::imread(img_path[i]);
         double predict_label=predictSample(img,model);
         std::cout<<predict_label<<std::endl;
+        if(predict_label==0){
+            refuse++;
+        }
         if(predict_label==target)
             success_count++;
     }
-    std::cout<<"accuracy is: "<<(double)success_count/img_path.size()<<std::endl;
+    std::cout<<"accuracy(except refuse) is: "<<(double)success_count/(img_path.size()-refuse)<<std::endl;
+    std::cout<<"refuse is: "<<(double)refuse/img_path.size()<<std::endl;
 }

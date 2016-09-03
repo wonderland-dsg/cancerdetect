@@ -25,21 +25,21 @@
 #include "breastcancer_predict.h"
 #include "GLCM.h"
 using namespace std;
-//#define test_pos
+#define test_pos
 #define test_neg
-//#define train
+#define train
 int main() {
     CancerPredict mcp;
     #ifdef train
-    mcp.trainModel("/home/dang/ClionProjects/breast_concer_detection/resource/samples/pos_all.lst",
-                   "/home/dang/ClionProjects/breast_concer_detection/resource/samples/neg_all.lst",
-                   "/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V3.model");
+    mcp.trainModel("../resource/breast_cancer/lists/train_norm_pos.lst",
+                   "../resource/breast_cancer/lists/train_norm_neg.lst",
+                   "../resource/svm_for_all_LBP_Canny.model");
     #endif
     #ifdef test_pos
-    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/pos_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V3.model",1.0);
+    mcp.testModel("../resource/breast_cancer/lists/validation_norm_pos.lst","../resource/svm_for_all_LBP_Canny.model",1.0);
     #endif
     #ifdef test_neg
-    mcp.testModel("/home/dang/ClionProjects/breast_concer_detection/resource/neg_all_test.lst","/home/dang/ClionProjects/breast_concer_detection/resource/svm_for_all_LBP_V3.model",-1.0);
+    mcp.testModel("../resource/breast_cancer/lists/validation_norm_neg.lst","../resource/svm_for_all_LBP_Canny.model",-1.0);
     #endif
 
     return 0;

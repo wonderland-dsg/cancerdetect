@@ -3,6 +3,8 @@
 //
 
 #include "LBP.h"
+#include <omp.h>
+#include "Canny.h"
 
 void LBP::getLBPImage(cv::Mat &src, cv::Mat &lbp) {
     cv::Mat grayImg;
@@ -15,6 +17,8 @@ void LBP::getLBPImage(cv::Mat &src, cv::Mat &lbp) {
     //cv::equalizeHist(grayImg,grayImg);
     lbp.create(src.size(), src.depth());
     lbp.setTo(0);
+    omp_set_num_threads(8);
+#pragma omp parallel for
     for (int r = 1; r < grayImg.rows - 1; ++r) {
         const uchar* prev = grayImg.ptr(r - 1);
         const uchar* curr = grayImg.ptr(r);
@@ -34,20 +38,47 @@ void LBP::getLBPImage(cv::Mat &src, cv::Mat &lbp) {
             pdst[c] = (uchar)g_lookTable[value];
         }
     }
+
+
 }
 
 void LBP::getLBPVector(cv::Mat &img, std::vector<float> &lbp_vector) {
-    cv::resize(img,img,cv::Size(480,360));
+    cv::Mat grayImg;
+    if (img.channels() == 3) {
+        cv::cvtColor(img, grayImg, CV_BGR2GRAY);
+    }
+    else {
+        img.copyTo(grayImg);
+    }
+    //cv::equalizeHist(grayImg,grayImg);
+    sigma=1;
+    int winsize=(int)(sigma*4);
+    if(winsize%2==0)winsize++;
+    cv::resize(grayImg,grayImg,cv::Size(480+winsize-3,360+winsize-3));
+
+    grayImg=getCanny(grayImg,sigma);
+
+   // std::cout<<"grayImg size:"<<grayImg.rows<<std::endl;
+
     cv::Mat lbp;
-    getLBPImage(img,lbp);
+    getLBPImage(grayImg,lbp);
+    //std::cout<<"getLBPImage "<<std::endl;
+
     lbp_vector.resize(58*576,0);
+    //std::cout<<"resizeLbp "<<std::endl;
     float* temp = &(lbp_vector[0]);
     // the boundary of the lbp is ignored, actually 78x58 rectangle is used.
-    for (int r = 1; r <= 329; r += 14) {
-        for (int c = 1; c <= 439; c += 19) {
+    //std::cout<<"temp "<<std::endl;
+    omp_set_num_threads(8);
+#pragma omp parallel for
+    for (int r = 1; r <= 329;r += 14) {//loop 24 times
+        for (int c = 1; c <= 439; c += 19) {//loop 24 times
             cv::Rect rect(c, r, 40, 30);
-            histFill(lbp, rect, temp);
-            temp += 58;
+            histFill(lbp, rect, temp+58*(((r-1)/14)*24+((c-1)/19)));
+            //temp += 58;
+
         }
     }
+
+    //std::cout<<"finish LBP "<<std::endl;
 }

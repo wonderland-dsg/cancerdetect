@@ -6,6 +6,10 @@
 #define BREAST_CONCER_DETECTION_LBP_H
 
 #include <opencv2/opencv.hpp>
+#include <tbb/tbb.h>
+#include <tbb/blocked_range.h>
+#include <tbb/concurrent_vector.h>
+
 static int g_lookTable[256]={
         56, 0, 7, 1, 14, 57, 8, 2, 21, 57, 57, 57, 15, 57, 9, 3, 28, 57, 57, 57, 57, 57, 57, 57, 22, 57, 57, 57,
         16, 57, 10, 4, 35, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 29, 57, 57, 57, 57, 57,
@@ -37,10 +41,13 @@ private:
     }
 public:
     LBP(){
+        sigma=1;
     }
     ~LBP(){
     }
     void getLBPVector(cv::Mat& img,std::vector<float>& lbp_vector);
+
+    double sigma; //sigma is the gauss kernel sigma
 
 };
 
