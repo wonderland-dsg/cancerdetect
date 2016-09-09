@@ -73,7 +73,7 @@ void CancerPredict::readTrainSample(const std::vector<std::string>& img_path,dou
     for (int i = 0; i < (int)img_path.size(); ++i) {
         cv::Mat img = cv::imread(img_path[i]);
         std::vector<float> feature;
-        mLBP.getLBPVector(img, feature);
+        mLBP.getLBPScalaVector(img, feature);
         //std::cout<<"mLBP.getLBPVector(img, feature) success!"<<std::endl;
         pnodes[cur+i] = new svm_node[(int)feature.size() + 1];
         copyFeatureToNode(feature, pnodes[cur+i]);

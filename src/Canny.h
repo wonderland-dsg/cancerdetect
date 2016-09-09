@@ -169,7 +169,6 @@ cv::Mat convolutionnXnKernel(const cv::Mat& source ,cv::Mat temp){
 
     //omp_set_num_threads(CPU_COREs);
 //#pragma omp parallel for
-
     for(int r=center;r<grayImg.rows-center;r++){
         //std::cout<<"r:"<<r<<std::endl;
         uchar** roi;
@@ -193,7 +192,7 @@ cv::Mat convolutionnXnKernel(const cv::Mat& source ,cv::Mat temp){
         }
     }
     //std::cout<<"finish!"<<std::endl;
-    FreenXnarray(t,3)
+    FreenXnarray(t,temp.rows)
     return re_d;
 }
 
@@ -226,7 +225,7 @@ cv::Mat convolution(const cv::Mat& source ,double t[3][3]){
             //std::cout<<pdst[l-1]<<"  ";
         }
     }
-    //std::cout<<"finish convolution"<<std::endl;
+    //std::cout<<"finish double[][] convolution"<<std::endl;
     return result;
 }
 
@@ -238,7 +237,7 @@ void getGuassCannyKernel(cv::Mat& Kx,cv::Mat& Ky,double sigma){
     MellocnXnDouble(gK,winsize)
     double sigma_2 = sigma * sigma;
     double sum = 0;
-    std::cout<<"begin calculate Kernel"<<std::endl;
+    //std::cout<<"begin calculate Kernel"<<std::endl;
     omp_set_num_threads(CPU_COREs);
 #pragma omp parallel for
     for(int i=0;i<winsize;i++){

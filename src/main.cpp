@@ -31,15 +31,15 @@ using namespace std;
 int main() {
     CancerPredict mcp;
     #ifdef train
-    mcp.trainModel("../resource/breast_cancer/lists/train_norm_pos.lst",
-                   "../resource/breast_cancer/lists/train_norm_neg.lst",
+    mcp.trainModel("../resource/lists/train_norm_pos.lst",
+                   "../resource/lists/train_norm_neg.lst",
                    "../resource/svm_for_all_LBP_Canny.model");
     #endif
     #ifdef test_pos
-    mcp.testModel("../resource/breast_cancer/lists/validation_norm_pos.lst","../resource/svm_for_all_LBP_Canny.model",1.0);
+    mcp.testModel("../resource/lists/validation_norm_pos.lst","../resource/svm_for_all_LBP_Canny.model",1.0);
     #endif
     #ifdef test_neg
-    mcp.testModel("../resource/breast_cancer/lists/validation_norm_neg.lst","../resource/svm_for_all_LBP_Canny.model",-1.0);
+    mcp.testModel("../resource/lists/validation_norm_neg.lst","../resource/svm_for_all_LBP_Canny.model",-1.0);
     #endif
 
     return 0;

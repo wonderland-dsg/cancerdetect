@@ -46,6 +46,7 @@ public:
     ~LBP(){
     }
     void getLBPVector(cv::Mat& img,std::vector<float>& lbp_vector);
+    void getLBPScalaVector(cv::Mat& img,std::vector<float>& lbp_vector);
 
     double sigma; //sigma is the gauss kernel sigma
 

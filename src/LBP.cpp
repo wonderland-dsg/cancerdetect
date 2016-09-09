@@ -17,6 +17,7 @@ void LBP::getLBPImage(cv::Mat &src, cv::Mat &lbp) {
     //cv::equalizeHist(grayImg,grayImg);
     lbp.create(src.size(), src.depth());
     lbp.setTo(0);
+
     omp_set_num_threads(8);
 #pragma omp parallel for
     for (int r = 1; r < grayImg.rows - 1; ++r) {
@@ -42,6 +43,16 @@ void LBP::getLBPImage(cv::Mat &src, cv::Mat &lbp) {
 
 }
 
+cv::Mat cannyProcess(cv::Mat grayImg,double sigma){
+    int winsize=(int)(sigma*4);
+    //std::cout<<"winsize"<<winsize<<std::endl;
+    if(winsize%2==0)winsize++;
+    //std::cout<<"winsize"<<winsize<<std::endl;
+    cv::resize(grayImg,grayImg,cv::Size(480+winsize-3,360+winsize-3));
+    grayImg=getCanny(grayImg,sigma);
+    return grayImg;
+}
+
 void LBP::getLBPVector(cv::Mat &img, std::vector<float> &lbp_vector) {
     cv::Mat grayImg;
     if (img.channels() == 3) {
@@ -51,12 +62,9 @@ void LBP::getLBPVector(cv::Mat &img, std::vector<float> &lbp_vector) {
         img.copyTo(grayImg);
     }
     //cv::equalizeHist(grayImg,grayImg);
-    sigma=1;
-    int winsize=(int)(sigma*4);
-    if(winsize%2==0)winsize++;
-    cv::resize(grayImg,grayImg,cv::Size(480+winsize-3,360+winsize-3));
+    //sigma=0.5;
 
-    grayImg=getCanny(grayImg,sigma);
+
 
    // std::cout<<"grayImg size:"<<grayImg.rows<<std::endl;
 
@@ -81,4 +89,29 @@ void LBP::getLBPVector(cv::Mat &img, std::vector<float> &lbp_vector) {
     }
 
     //std::cout<<"finish LBP "<<std::endl;
+}
+
+void LBP::getLBPScalaVector(cv::Mat &img, std::vector<float> &lbp_vector) {
+    cv::Mat grayImg;
+    if (img.channels() == 3) {
+        cv::cvtColor(img, grayImg, CV_BGR2GRAY);
+    }
+    else {
+        img.copyTo(grayImg);
+    }
+#define scala 7
+    double sigmas[scala]={0.5,1,1.5,2,3,3.5,4};
+    //cv::Mat grayImg1,grayImg2,grayImg3,grayImg4;
+    std::vector<cv::Mat> immages;
+    for(int i=0;i<scala;i++){
+        immages.push_back(cannyProcess(grayImg,sigmas[i]));
+    }
+    std::vector<float> temp;
+    for(int i=0;i<immages.size();i++){
+        getLBPVector(immages[i],temp);
+        for(int j=0;j<temp.size();j++){
+            lbp_vector.push_back(temp[j]);
+        }
+    }
+
 }
