@@ -73,7 +73,23 @@ void CancerPredict::readTrainSample(const std::vector<std::string>& img_path,dou
     for (int i = 0; i < (int)img_path.size(); ++i) {
         cv::Mat img = cv::imread(img_path[i]);
         std::vector<float> feature;
-        mLBP.getLBPScalaVector(img, feature);
+
+#define myDebug
+#ifdef myDebug
+        /*********************   test debug    ***********/
+    std::vector<cv::Mat> images,lbpImgs1;
+    std::vector<cv::Mat> lbpImgs2;
+    mLBP.getLBPScalaVectorDebug(img, feature,images,lbpImgs1,lbpImgs2);
+    for(int ii=0;ii<images.size();ii++){
+        cv::imshow("scala Img",images[ii]);
+        cv::imshow("lbpImgs1 Img",lbpImgs1[ii]);
+        cv::imshow("lbpImgs2 Img",lbpImgs2[ii]);
+        cv::waitKey(0);
+    }
+    /*********************   test debug    ***********/
+#endif
+
+        //mLBP.getLBPScalaVector(img, feature);
         //std::cout<<"mLBP.getLBPVector(img, feature) success!"<<std::endl;
         pnodes[cur+i] = new svm_node[(int)feature.size() + 1];
         copyFeatureToNode(feature, pnodes[cur+i]);
@@ -163,7 +179,22 @@ double CancerPredict::predictSample(cv::Mat img, const char *model_file) {
 
 double CancerPredict::predictSample(cv::Mat img, svm_model* model) {
     std::vector<float> feature;
-    mLBP.getLBPVector(img, feature);
+
+#ifdef myDebug
+    /*********************   test debug    ***********/
+    std::vector<cv::Mat> images,lbpImgs1;
+    std::vector<cv::Mat> lbpImgs2;
+    mLBP.getLBPScalaVectorDebug(img, feature,images,lbpImgs1,lbpImgs2);
+    for(int i=0;i<images.size();i++){
+        cv::imshow("scala Img",images[i]);
+        cv::imshow("lbpImgs1 Img",lbpImgs1[i]);
+        cv::imshow("lbpImgs2 Img",lbpImgs2[i]);
+        cv::waitKey(0);
+    }
+    /*********************   test debug    ***********/
+#endif
+    mLBP.getLBPScalaVector(img, feature);
+
     svm_node *x;
     x=new svm_node[feature.size()+1];
     x[feature.size()].index=-1;

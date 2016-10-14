@@ -4,6 +4,6 @@ build_POLY
 build_RBF
 build_SIG
 resource/*
-!resource/svm_for_glcm_all_1.model
-!resource/samples_all_pos_neg.param
+#!resource/svm_for_glcm_all_1.model
+#!resource/samples_all_pos_neg.param
 svm_for_all_2.model

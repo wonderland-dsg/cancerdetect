@@ -27,6 +27,8 @@ private:
 
     void getLBPImage(cv::Mat& src,cv::Mat& lbp);
 
+    void getLBPVectorDebug(cv::Mat &img, std::vector<float> &lbp_vector,cv::Mat& lbpImg,cv::Mat& lbpImg2);
+
     void histFill(cv::Mat& img, cv::Rect rect, float* feature, int len = 58)
     {
         cv::Mat tmpImg = img(rect);
@@ -47,7 +49,7 @@ public:
     }
     void getLBPVector(cv::Mat& img,std::vector<float>& lbp_vector);
     void getLBPScalaVector(cv::Mat& img,std::vector<float>& lbp_vector);
-
+    void getLBPScalaVectorDebug(cv::Mat &img, std::vector<float> &lbp_vector,std::vector<cv::Mat>& immages,std::vector<cv::Mat>& lbpImgs1,std::vector<cv::Mat>& lbpImgs2);
     double sigma; //sigma is the gauss kernel sigma
 
 };
